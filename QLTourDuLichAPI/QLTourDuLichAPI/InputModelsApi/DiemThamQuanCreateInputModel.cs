@@ -9,7 +9,7 @@ namespace QLTourDuLichAPI.InputModelsApi
 
         public string Mien { get; set; } = null!;
 
-        public string TenFileAnh { get; set; } = null!;
+        public IFormFile? TenFileAnh { get; set; } = null!;
 
         public string? MoTa { get; set; }
     }
