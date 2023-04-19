@@ -7,6 +7,7 @@ namespace QLTourDuLichAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //nhân non tay
     public class ApiNhanVien : Controller
     {
         QltourdlApiContext db = new QltourdlApiContext();
