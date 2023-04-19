@@ -28,7 +28,6 @@
                                 <th>Tên Địa Điểm</th>
                                 <th>Miền</th>
                                 <th>Ảnh</th>
-                                <th>Mô Tả</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -36,6 +35,7 @@
                         <tbody id="tbody-diemthamquan">
                         </tbody>
                     </table>
+                    <br />
                     <div class="text-center">Page <span id="page-number">1</span></div>
                     <div id="pagination_diemthamquan"></div>
                 </div>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tendd">Tên Địa Điểm</label>
-                            <input type="text" class="form-control" id="tendiadiem" placeholder="Tên địa điểm">
+                            <input type="text" class="form-control" id="tendd" placeholder="Tên địa điểm">
                         </div>
                         <div class="form-group">
                             <label for="mien">Miền</label>
@@ -61,7 +61,7 @@
                               
                                     <option value="Bắc">Bắc</option>
                                     <option value="Trung">Trung</option>
-                                <option value="Nam">Nam</option>
+                                    <option value="Nam">Nam</option>
                               
                             </select>
                         </div>
@@ -70,11 +70,11 @@
                             <input type="file" id="avatar" name="anhdaidien" required>
                         </div>
                         <div class="form-group">
-                            <label for="mota">Mota</label>
+                            <label for="mota">Mô Tả</label>
                             <input type="text" class="form-control" id="mota" placeholder="Mô tả">
                         </div>
-                        <button class="btn btn-gradient-primary me-2" onclick="InsertTranDau()">Thêm</button>
-                        <button class="btn btn-gradient-primary me-2" onclick="UpdateTranDau()">Sửa</button>
+                        <button class="btn btn-gradient-primary me-2" onclick="InsertDiemThamQuan()">Thêm</button>
+                        <button class="btn btn-gradient-primary me-2" onclick="UpdateDTQ()">Sửa</button>
                         <button class="btn btn-light" onclick="resetInput()">Cancel</button>
                     </form>
                 </div>
