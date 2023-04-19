@@ -28,14 +28,22 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
         }
         [Route("DSDTQuan")]
         [Authentication]
-        public IActionResult DSDTQuan()
-        {
-            ViewBag.Username = HttpContext.Session.GetString("UserName");
-            var lstDTQ = (from a in db.DiemThamQuans select a).ToList();
-            return View(lstDTQ);
-        }
+		public IActionResult DSDTQuan()
+		{
+			ViewBag.Username = HttpContext.Session.GetString("UserName");
+			var lstDTQ = (from a in db.DiemThamQuans select a).ToList();
+			return View(lstDTQ);
+		}
+
+		[Route("danhsachnhansu")]
+		[Authentication]
+		public IActionResult danhsachnhansu()
+		{
+			ViewBag.Username = HttpContext.Session.GetString("UserName");
+			var lstNV = (from a in db.NhanViens select a).ToList();
+			return View(lstNV);
+		}
 
 
-
-    }
+	}
 }
