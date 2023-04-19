@@ -25,6 +25,14 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             /*  if (Session["U"])*/
             return View();
         }
+        [Route("DSDTQuan")]
+        [Authentication]
+        public IActionResult DSDTQuan()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstDTQ = (from a in db.DiemThamQuans select a).ToList();
+            return View(lstDTQ);
+        }
 
 
 
