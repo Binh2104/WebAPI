@@ -8,7 +8,9 @@ builder.Services.AddControllersWithViews();
 
 var connectString = builder.Configuration.GetConnectionString("QltourdlApiConText");
 builder.Services.AddDbContext<QltourdlApiContext>(x => x.UseSqlServer(connectString));
-
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
+    .AddEnvironmentVariables();
 builder.Services.AddSession();
 builder.Services.AddSession();
 
