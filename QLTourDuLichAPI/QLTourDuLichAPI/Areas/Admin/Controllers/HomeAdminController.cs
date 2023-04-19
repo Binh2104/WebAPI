@@ -8,6 +8,7 @@ using X.PagedList;
 
 namespace QLTourDuLichAPI.Areas.Admin.Controllers
 {
+    //thu
     [Area("Admin")]
     [Route("Admin")]
     [Route("Admin/HomeAdmin")]
