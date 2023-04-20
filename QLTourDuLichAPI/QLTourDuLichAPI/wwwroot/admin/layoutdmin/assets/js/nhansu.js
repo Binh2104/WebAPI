@@ -158,6 +158,7 @@ function updateNVFill(id) {
             $("#diachi").val(response.diaChi.trim()).change()           
             $("#UserName").val(response.userName.trim()).change()           
         }
+       
     });
 }
 
