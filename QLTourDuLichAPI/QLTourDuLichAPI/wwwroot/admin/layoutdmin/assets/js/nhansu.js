@@ -71,6 +71,7 @@ function resetInput() {
     $("#gioitinh").val("").change()
     $("#sdt").val("").change()
     $("#diachi").val("").change()
+    $("#UserName").val("").change()
 }
 function InsertNV() {
     var maNv = $("#MaNV").val();
@@ -78,18 +79,15 @@ function InsertNV() {
     var gioitinh = $("#gioitinh").val();
     var sodienthoai = $("#sdt").val();
     var diachi = $("#diachi").val();
-
-    table = table + '<td>' + response.items[i].maNv.trim() + '</td>';
-    table = table + '<td>' + response.items[i].tenNv.trim() + '</td>';
-    table = table + '<td>' + response.items[i].gioiTinh.trim() + '</td>';
-    table = table + '<td>' + response.items[i].soDienThoai.trim() + '</td>';
-    table = table + '<td>' + response.items[i].diaChi.trim() + '</td>';
-
+    var UserName = $("#UserName").val();
+    var formData = new FormData();
     formData.append("maNv", maNv);
     formData.append("tenNv", tennv);
     formData.append("gioiTinh", gioitinh);
     formData.append("soDienThoai", sodienthoai);
     formData.append("diaChi", diachi);
+    formData.append("userName", UserName);
+
 
     var url = 'https://localhost:7269/api/apinhanvien/themNV';
     $.ajax({
@@ -114,14 +112,14 @@ function UpdateNV() {
     var gioitinh = $("#gioitinh").val();
     var sodienthoai = $("#sdt").val();
     var diachi = $("#diachi").val();
-
-   
-
+    var UserName = $("#UserName").val();
+    var formData = new FormData();
     formData.append("maNv", maNv);
     formData.append("tenNv", tennv);
     formData.append("gioiTinh", gioitinh);
     formData.append("soDienThoai", sodienthoai);
     formData.append("diaChi", diachi);
+    formData.append("userName", UserName);
 
     var url = 'https://localhost:7269/api/apinhanvien/capnhatNV';
     $.ajax({
@@ -152,11 +150,13 @@ function updateNVFill(id) {
             alert("Cập nhật không thành công");
         },
         success: function (response) {
+
             $("#MaNV").val(response.maNv.trim())
             $("#TenNV").val(response.tenNv.trim()).change()
             $("#gioitinh").val(response.gioiTinh.trim()).change()
             $("#sdt").val(response.soDienThoai.trim()).change()
             $("#diachi").val(response.diaChi.trim()).change()           
+            $("#UserName").val(response.userName.trim()).change()           
         }
     });
 }
@@ -189,6 +189,7 @@ function renderTable(response) {
         table = table + '<td>' + response.items[i].gioiTinh.trim() + '</td>';
         table = table + '<td>' + response.items[i].soDienThoai.trim() + '</td>';
         table = table + '<td>' + response.items[i].diaChi.trim() + '</td>';
+        table = table + '<td>' + response.items[i].userName.trim() + '</td>';
 
         table = table + '<td>' + ' <button type="button" class="btn btn-gradient-info btn-rounded btn-icon" onclick="updateNVFill(\'' + response.items[i].maNv.trim() + '\')">Edit</i></button> ' + '</td>';
         table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteNV(\'' + response.items[i].maNv.trim() + '\')">Delete</button> ' + '</td>';

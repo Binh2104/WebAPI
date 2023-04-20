@@ -77,7 +77,7 @@ function InsertTK() {
     var Password = $("#password").val();
     var ConfirmPassword = $("#confirmPassword").val();
 
-
+    var formData = new FormData();
     formData.append("userName", UserName);
     formData.append("loai", Loai);
     formData.append("password", Password);
@@ -97,55 +97,6 @@ function InsertTK() {
             alert("Thêm mới thành công");
             resetInput();
             getAllTaikhoan(); //Gọi đến hàm lấy dữ liệu lên bảng
-        }
-    });
-}
-function UpdateTK() {
-    var UserName = $("#userName").val();
-    var Loai = $("#loai").val();
-    var Password = $("#password").val();
-    var ConfirmPassword = $("#confirmPassword").val();
-
-
-
-    formData.append("userName", UserName);
-    formData.append("loai", Loai);
-    formData.append("password", Password);
-    formData.append("confirmPassword", ConfirmPassword);
-
-    var url = 'https://localhost:7269/api/apitaikhoan/capnhatTK';
-    $.ajax({
-        url: url,
-        method: 'PUT',
-        processData: false,
-        contentType: false,
-        data: formData,
-        error: function (error) {
-            alert("Có lỗi xảy ra");
-        },
-        success: function (response) {
-            alert("Cập nhật thành công");
-            resetInput();
-            getAllTaikhoan(); //Gọi đến hàm lấy dữ liệu lên bảng
-        }
-    });
-}
-
-function updateTKFill(id) {
-    var url = 'https://localhost:7269/api/Apitaikhoan/getById?id=' + id;
-    $.ajax({
-        url: url,
-        method: 'GET',
-        contentType: 'json',
-        dataType: 'json',
-        error: function (response) {
-            alert("Cập nhật không thành công");
-        },
-        success: function (response) {
-            $("#userName").val(response.userName.trim())
-            $("#loai").val(response.loai).change()
-            $("#password").val(response.password.trim()).change()
-            $("#confirmPassword").val(response.confirmPassword.trim()).change()
         }
     });
 }
@@ -178,7 +129,6 @@ function renderTable(response) {
         table = table + '<td>' + response.items[i].password.trim() + '</td>';
         table = table + '<td>' + response.items[i].confirmPassword.trim() + '</td>';
 
-        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-info btn-rounded btn-icon" onclick="updateTKFill(\'' + response.items[i].userName.trim() + '\')">Edit</i></button> ' + '</td>';
         table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteTK(\'' + response.items[i].userName.trim() + '\')">Delete</button> ' + '</td>';
     }
     document.getElementById('tbody-taikhoan').innerHTML = table;

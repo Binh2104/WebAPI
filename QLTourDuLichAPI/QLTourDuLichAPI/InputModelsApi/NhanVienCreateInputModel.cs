@@ -9,5 +9,6 @@ namespace QLTourDuLichAPI.InputModelsApi
 
         public string SoDienThoai { get; set; } = null!;
         public string DiaChi { get; set; } = null!;
+        public string UserName { get; set; } = null!;
     }
 }

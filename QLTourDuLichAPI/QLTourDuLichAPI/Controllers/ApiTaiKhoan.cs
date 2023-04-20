@@ -92,40 +92,7 @@ namespace QLTourDuLichAPI.Controllers
             return Ok(input);
         }
 
-        [HttpPut]
-        [Route("capnhatTK")]
-        public async Task<IActionResult> UpdateTKAsync([FromForm] TaiKhoanCreateInputModel input)
-        {
-            ViewBag.Username = HttpContext.Session.GetString("UserName");
-            var username = HttpContext.Session.GetString("UserName");
-            var userid = (from a in db.TaiKhoans
-                          where a.UserName == username
-                          select a.UserName.ToString()).FirstOrDefault();
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Find the TaiKhoan in the database by id
-            var TK = await db.TaiKhoans.FindAsync(input.UserName);
-            if (TK == null)
-            {
-                return NotFound();
-            }
-
-            // Update the TaiKhoan object with the form data
-            TK.UserName = input.UserName;
-            TK.Loai = input.Loai;
-            TK.Password = input.Password;
-            TK.ConfirmPassword = input.ConfirmPassword;
-
-
-            // Update the TaiKhoan in the database
-            db.TaiKhoans.Update(TK);
-            await db.SaveChangesAsync();
-
-            return Ok();
-        }
+        
 
         [HttpDelete]
         public IActionResult DeleteTK(string input)

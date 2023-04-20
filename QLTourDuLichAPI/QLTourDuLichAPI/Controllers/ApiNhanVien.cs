@@ -22,7 +22,8 @@ namespace QLTourDuLichAPI.Controllers
                              a.TenNv,
                              a.GioiTinh,
                              a.SoDienThoai,
-                             a.DiaChi
+                             a.DiaChi,
+                             a.UserName
                          });
             var totalCount = query.Count();
             //var pageCount = (int)Math.Ceiling((double)totalCount / pageSize);
@@ -52,7 +53,8 @@ namespace QLTourDuLichAPI.Controllers
                               a.TenNv,
                               a.GioiTinh,
                               a.SoDienThoai,
-                              a.DiaChi
+                              a.DiaChi,
+                              a.UserName
                           })
                               .Skip((pageNumber - 1) * pageSize)
                               .Take(pageSize)
@@ -86,7 +88,9 @@ namespace QLTourDuLichAPI.Controllers
                 TenNv = input.TenNV,
                 GioiTinh = input.GioiTinh,
                 SoDienThoai = input.SoDienThoai,
-                DiaChi = input.DiaChi
+                DiaChi = input.DiaChi,
+                UserName = input.UserName
+                
             };
 
             db.NhanViens.Add(newNV);
@@ -121,8 +125,9 @@ namespace QLTourDuLichAPI.Controllers
             NV.GioiTinh = input.GioiTinh;
             NV.SoDienThoai = input.SoDienThoai;
             NV.DiaChi = input.DiaChi;
+            NV.UserName = input.UserName;
 
-           
+
 
             // Update the TinTuc in the database
             db.NhanViens.Update(NV);
