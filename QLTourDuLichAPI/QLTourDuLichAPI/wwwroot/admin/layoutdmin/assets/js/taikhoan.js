@@ -77,11 +77,6 @@ function InsertTK() {
     var Password = $("#password").val();
     var ConfirmPassword = $("#confirmPassword").val();
 
-    table = table + '<td>' + response.items[i].userName.trim() + '</td>';
-    table = table + '<td>' + response.items[i].loai.trim() + '</td>';
-    table = table + '<td>' + response.items[i].password.trim() + '</td>';
-    table = table + '<td>' + response.items[i].confirmPassword.trim() + '</td>';
-
 
     formData.append("userName", UserName);
     formData.append("loai", Loai);
@@ -148,7 +143,7 @@ function updateTKFill(id) {
         },
         success: function (response) {
             $("#userName").val(response.userName.trim())
-            $("#loai").val(response.loai.trim()).change()
+            $("#loai").val(response.loai).change()
             $("#password").val(response.password.trim()).change()
             $("#confirmPassword").val(response.confirmPassword.trim()).change()
         }
