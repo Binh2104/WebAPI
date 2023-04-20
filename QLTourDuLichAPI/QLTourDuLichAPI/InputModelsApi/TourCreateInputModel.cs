@@ -9,7 +9,7 @@ namespace QLTourDuLichAPI.InputModelsApi
 
         public int GiaCho { get; set; }
 
-        public string Anh { get; set; } = null!;
+        public IFormFile? Anh { get; set; } = null!;
 
         public string DiemXuatPhat { get; set; } = null!;
 
