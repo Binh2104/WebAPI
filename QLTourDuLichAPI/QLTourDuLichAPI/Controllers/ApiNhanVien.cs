@@ -65,7 +65,24 @@ namespace QLTourDuLichAPI.Controllers
             };
             return Ok(result);
         }
-
+        [Route("getById")]
+        [HttpGet]
+        public IActionResult GetNhanVienId(string id)
+        {
+            var NV = (from a in db.NhanViens
+                       where a.MaNv == id
+                       select new
+                       {
+                           a.MaNv,
+                           a.TenNv,
+                           a.GioiTinh,
+                           a.SoDienThoai,
+                           a.DiaChi,
+                           a.UserName
+                       })
+                              .FirstOrDefault();
+            return Ok(NV);
+        }
         [HttpPost]
         [Route("themNV")]
         public async Task<IActionResult> AddNV([FromForm] NhanVienCreateInputModel input)
