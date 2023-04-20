@@ -179,7 +179,7 @@ function renderTable(response) {
     for (var i = 0; i < len; ++i) {
         table = table + '<tr>';
         table = table + '<td>' + response.items[i].userName.trim() + '</td>';
-        table = table + '<td>' + response.items[i].loai.trim() + '</td>';
+        table = table + '<td>' + response.items[i].loai + '</td>';
         table = table + '<td>' + response.items[i].password.trim() + '</td>';
         table = table + '<td>' + response.items[i].confirmPassword.trim() + '</td>';
 
