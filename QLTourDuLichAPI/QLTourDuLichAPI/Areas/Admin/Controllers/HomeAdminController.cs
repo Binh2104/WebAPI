@@ -26,6 +26,7 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             /*  if (Session["U"])*/
             return View();
         }
+        //diem tham quan
         [Route("DSDTQuan")]
         [Authentication]
 		public IActionResult DSDTQuan()
@@ -34,8 +35,17 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
 			var lstDTQ = (from a in db.DiemThamQuans select a).ToList();
 			return View(lstDTQ);
 		}
-
-		[Route("danhsachnhansu")]
+        //tour du lich
+        [Route("DSTour")]
+        [Authentication]
+        public IActionResult DSTour()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTour = (from a in db.Tours select a).ToList();
+            return View(lstTour);
+        }
+        //Nhan Vien
+        [Route("danhsachnhansu")]
 		[Authentication]
 		public IActionResult danhsachnhansu()
 		{
