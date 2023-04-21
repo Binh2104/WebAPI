@@ -171,17 +171,23 @@ namespace QLTourDuLichAPI.Controllers
         public IActionResult DeleteDTQ(string input)
         {
             var DDCheck = (from a in db.DiemThamQuans
-                           where a.MaDd == input
+                           where a.MaDd == input 
                            select a).FirstOrDefault();
-                               
+            var check = (from a in db.DiemThamQuans
+                         join b in db.DiaDiemTours on a.MaDd equals b.MaDd
+                        join c in db.Tours on b.MaTour equals c.MaTour
+                         where b.MaDd == input
+                         select a).FirstOrDefault();
             if (DDCheck == null)
             {
                 return BadRequest("Khong tim thay diem tham quan!");
             }
-
+            else if (check != null)
+            {
+                return BadRequest("Khong thể xóa");
+            }          
             db.DiemThamQuans.Remove(DDCheck);
             db.SaveChanges();
-
             return Ok(input);
         }
     }

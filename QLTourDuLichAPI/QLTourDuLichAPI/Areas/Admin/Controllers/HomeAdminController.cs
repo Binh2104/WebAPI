@@ -49,7 +49,20 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
         public IActionResult ThemDDchoTour()
         {
             ViewBag.Username = HttpContext.Session.GetString("UserName");
-            
+            var lstTour = (from a in db.Tours
+                         select new
+                         {
+                             a.MaTour,
+                             a.TenTour
+                         }).ToList();
+            var lstDD = (from a in db.DiemThamQuans
+                         select new
+                         {
+                             a.MaDd,
+                             a.Tendiadiem
+                         }).ToList();
+            ViewBag.DD=lstDD;
+            ViewBag.Tour = lstTour;
             return View();
         }
         //Nhan Vien

@@ -13,6 +13,29 @@
             </ol>
         </nav>
     </div>
+    <div class="col-lg-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Danh Sách Tour và DTQ</h4>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr class="table-info">
+                            <th>Tên Tour</th>
+                            <th>Điểm Thăm quan</th>
+                            <th>Vị Trí Ảnh</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-DDT">
+                    </tbody>
+                </table>
+                <br />
+                <div class="text-center">Page <span id="page-number">1</span></div>
+                <div id="pagination_DDT"></div>
+            </div>
+        </div>
+    </div>
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -20,17 +43,27 @@
                 <p class="card-description" id="card-action"></p>
                 <form class="forms-sample" id="form-tour">
                     <div class="form-group">
-                        <label for="MaTour">Mã Tour</label>
-                        <input type="text" class="form-control" id="MaTour" placeholder="Mã Tour">
+                        <label for="MaTour">Tour</label>
+                        <select class="form-control form-control-lg" id="MaTour">
+                            @foreach (var item in ViewBag.Tour)
+                            {
+                                <option value=@item.MaTour>@item.TenTour</option>
+                            }
+                        </select>
                     </div>
                      <div class="form-group">
-                       <label for="Madiemtham">Mã Điểm Thăm Quan</label>
-                        <input type="text" class="form-control" id="MaTour" placeholder="Mã Tour">
+                       <label for="MaDTQ">Điểm Thăm Quan</label>
+                        <select class="form-control form-control-lg" id="MaTour">
+                            @foreach (var item in ViewBag.DD)
+                            {
+                                <option value=@item.MaDd>@item.Tendiadiem</option>
+                            }
+                        </select>
                     </div>
-                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="InsertTour()">
+                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="Insert()">
                         <i class="mdi mdi-upload btn-icon-prepend"></i>Thêm
                     </button>
-                    <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="UpdateTour()">
+                    <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="Update()">
                         Sửa <i class="mdi mdi-file-check btn-icon-append"></i>
                     </button>
                     <button type="button" class="btn btn-gradient-warning btn-icon-text" onclick="resetInput()">
@@ -41,4 +74,4 @@
         </div>
     </div>
 </div>
-<script src="~/admin/layoutdmin/assets/js/tour.js"></script>
+<script src="~/admin/layoutdmin/assets/js/ddt.js"></script>
