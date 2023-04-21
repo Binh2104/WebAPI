@@ -72,7 +72,12 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
 		{
 			ViewBag.Username = HttpContext.Session.GetString("UserName");
 			var lstNV = (from a in db.NhanViens select a).ToList();
-			return View(lstNV);
+            var lstU = (from a in db.TaiKhoans
+                        where a.Loai == 1 && !db.NhanViens.Select(nv => nv.UserName).Contains(a.UserName)
+                        select a.UserName).ToList();
+            ViewBag.U = lstU;
+            return View(lstNV);
+
 		}
         [Route("taikhoan")]
         [Authentication]

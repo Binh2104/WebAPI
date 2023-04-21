@@ -23,8 +23,8 @@
                             <th>Tên Tour</th>
                             <th>Điểm Thăm quan</th>
                             <th>Vị Trí Ảnh</th>
-                            <th></th>
-                            <th></th>
+                            @*<th></th>
+                            <th></th>*@
                         </tr>
                     </thead>
                     <tbody id="tbody-DDT">
@@ -53,12 +53,16 @@
                     </div>
                      <div class="form-group">
                        <label for="MaDTQ">Điểm Thăm Quan</label>
-                        <select class="form-control form-control-lg" id="MaTour">
+                        <select class="form-control form-control-lg" id="MaDTQ">
                             @foreach (var item in ViewBag.DD)
                             {
                                 <option value=@item.MaDd>@item.Tendiadiem</option>
                             }
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="ViTriAnh">Vị Trí Ảnh</label>                          
+                            <input type="text" class="form-control" id="ViTriAnh" placeholder="Vị Trí Ảnh">
                     </div>
                     <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="Insert()">
                         <i class="mdi mdi-upload btn-icon-prepend"></i>Thêm
