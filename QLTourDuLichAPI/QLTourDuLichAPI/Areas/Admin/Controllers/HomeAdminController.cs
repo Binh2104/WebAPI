@@ -74,7 +74,15 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
 			var lstNV = (from a in db.NhanViens select a).ToList();
 			return View(lstNV);
 		}
+        [Route("taikhoan")]
+        [Authentication]
+        public IActionResult taikhoan()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTK = (from a in db.TaiKhoans select a).ToList();
+            return View(lstTK);
+        }
 
 
-	}
+    }
 }
