@@ -14,7 +14,7 @@ function getAllTaikhoan() {
         success: function (response) {
             var count = parseInt(response.totalCount);
             const pageNumber = 1;
-            const pageSize = 3;
+            const pageSize = 5;
             $.ajax({
                 url: `https://localhost:7269/api/apitaikhoan/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
                 method: 'GET',
@@ -46,7 +46,7 @@ function renderPagination(totalPages, currentPage) {
 }
 
 function setPage(pageNumber) {
-    const pageSize = 3;
+    const pageSize = 5;
     document.getElementById('page-number').innerHTML = pageNumber;
     $.ajax({
         url: `https://localhost:7269/api/apitaikhoan/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,

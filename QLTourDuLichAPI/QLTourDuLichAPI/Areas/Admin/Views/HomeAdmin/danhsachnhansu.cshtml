@@ -1,4 +1,5 @@
 ﻿@*Loi test push 2*@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "danhsachnhanvien";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
@@ -9,7 +10,7 @@
         <h3 class="page-title"> Nhân viên </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a asp-controller="HomeAdmin" asp-action="Index">Trang chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Nhân viên</li>
             </ol>
         </nav>

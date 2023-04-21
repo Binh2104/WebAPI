@@ -2,13 +2,14 @@
     ViewData["Title"] = "taikhoan";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="content-wrapper">
     <div class="page-header">
         <h3 class="page-title"> Tài Khoản </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a asp-controller="HomeAdmin" asp-action="Index">Trang chủ</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Tài Khoản</li>
             </ol>
         </nav>
