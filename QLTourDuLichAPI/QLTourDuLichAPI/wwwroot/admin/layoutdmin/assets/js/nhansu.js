@@ -14,7 +14,7 @@ function getAllNhanvien() {
         success: function (response) {
             var count = parseInt(response.totalCount);
             const pageNumber = 1;
-            const pageSize = 3;
+            const pageSize = 5;
             $.ajax({
                 url: `https://localhost:7269/api/apinhanvien/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
                 method: 'GET',
@@ -46,7 +46,7 @@ function renderPagination(totalPages, currentPage) {
 }
 
 function setPage(pageNumber) {
-    const pageSize = 3;
+    const pageSize = 5;
     document.getElementById('page-number').innerHTML = pageNumber;
     $.ajax({
         url: `https://localhost:7269/api/apinhanvien/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
@@ -64,21 +64,143 @@ function setPage(pageNumber) {
         }
     });
 }
+
+function resetInput() {
+    $("#MaNV").val("").change()
+    $("#TenNV").val("").change()
+    $("#gioitinh").val("").change()
+    $("#sdt").val("").change()
+    $("#diachi").val("").change()
+    $("#UserName").val("").change()
+}
+function InsertNV() {
+    var maNv = $("#MaNV").val();
+    var tennv = $("#TenNV").val();
+    var gioitinh = $("#gioitinh").val();
+    var sodienthoai = $("#sdt").val();
+    var diachi = $("#diachi").val();
+    var UserName = $("#UserName").val();
+    var formData = new FormData();
+    formData.append("maNv", maNv);
+    formData.append("tenNv", tennv);
+    formData.append("gioiTinh", gioitinh);
+    formData.append("soDienThoai", sodienthoai);
+    formData.append("diaChi", diachi);
+    formData.append("userName", UserName);
+
+
+    var url = 'https://localhost:7269/api/apinhanvien/themNV';
+    $.ajax({
+        url: url,
+        method: 'POST',
+        processData: false,
+        contentType: false,
+        data: formData,
+        error: function (error) {
+            alert("Có lỗi xảy ra");
+        },
+        success: function (response) {
+            alert("Thêm mới thành công");
+            resetInput();
+            getAllNhanvien(); //Gọi đến hàm lấy dữ liệu lên bảng
+        }
+    });
+}
+function UpdateNV() {   
+    var maNv = $("#MaNV").val();
+    var tennv = $("#TenNV").val();
+    var gioitinh = $("#gioitinh").val();
+    var sodienthoai = $("#sdt").val();
+    var diachi = $("#diachi").val();
+    var UserName = $("#UserName").val();
+    var formData = new FormData();
+    formData.append("maNv", maNv);
+    formData.append("tenNv", tennv);
+    formData.append("gioiTinh", gioitinh);
+    formData.append("soDienThoai", sodienthoai);
+    formData.append("diaChi", diachi);
+    formData.append("userName", UserName);
+
+    var url = 'https://localhost:7269/api/apinhanvien/capnhatNV';
+    $.ajax({
+        url: url,
+        method: 'PUT',
+        processData: false,
+        contentType: false,
+        data: formData,
+        error: function (error) {
+            alert("Có lỗi xảy ra");
+        },
+        success: function (response) {
+            alert("Cập nhật thành công");
+            resetInput();
+            getAllNhanvien(); //Gọi đến hàm lấy dữ liệu lên bảng
+        }
+    });
+}
+
+function updateNVFill(id) {
+    var url = 'https://localhost:7269/api/ApiNhanVien/getById?id=' + id;
+    $.ajax({
+        url: url,
+        method: 'GET',
+        contentType: 'json',
+        dataType: 'json',
+        error: function (response) {
+            alert("Cập nhật không thành công");
+        },
+        success: function (response) {
+
+            $("#MaNV").val(response.maNv.trim())
+            $("#TenNV").val(response.tenNv.trim()).change()
+            $("#gioitinh").val(response.gioiTinh.trim()).change()
+            $("#sdt").val(response.soDienThoai.trim()).change()
+            $("#diachi").val(response.diaChi.trim()).change()           
+            $("#UserName").val(response.userName.trim()).change()           
+        }
+       
+    });
+}
+
+function deleteNV(id) {
+    var url = 'https://localhost:7269/api/ApiNhanVien?input=' + id;
+    $.ajax({
+        url: url,
+        method: 'DELETE',
+        contentType: 'json',
+        dataType: 'json',
+        error: function (response) {
+            /* alert("Xóa không thành công");*/
+            getAllNhanvien();
+        },
+        success: function (response) {
+            alert("Xóa thành công");
+            getAllNhanvien(); //Gọi đến hàm lấy dữ liệu lên bảng
+        }
+    });
+}
+
 function renderTable(response) {
     const len = response.items.length;
     let table = '';
+    let cls = "table-success";
     for (var i = 0; i < len; ++i) {
-        table = table + '<tr>';
+        if (i % 2 == 0) {
+            cls = "table-primary";
+        }
+        else {
+            cls = "table-success";
+        }
+        table = table + '<tr class="' + cls + '">';
         table = table + '<td>' + response.items[i].maNv.trim() + '</td>';
         table = table + '<td>' + response.items[i].tenNv.trim() + '</td>';
         table = table + '<td>' + response.items[i].gioiTinh.trim() + '</td>';
         table = table + '<td>' + response.items[i].soDienThoai.trim() + '</td>';
         table = table + '<td>' + response.items[i].diaChi.trim() + '</td>';
-        
-        /* table = table + '<td>' + response.items[i].moTa.trim() + '</td>';*/
+        table = table + '<td>' + response.items[i].userName.trim() + '</td>';
 
-        /* table = table + '<td>' + ' <button type="button" class="btn btn-gradient-info btn-rounded btn-icon" onclick="updateCauThuFill(\'' + response.items[i].cauThuId.trim() + '\')"><i class="mdi mdi-table-edit"></i></button> ' + '</td>';
-         table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteCauThu(\'' + response.items[i].cauThuId.trim() + '\')"><i class="mdi mdi-delete-forever"></i></button> ' + '</td>';*/
+        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-info btn-rounded btn-icon" onclick="updateNVFill(\'' + response.items[i].maNv.trim() + '\')">Edit</i></button> ' + '</td>';
+        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteNV(\'' + response.items[i].maNv.trim() + '\')">Delete</button> ' + '</td>';
     }
     document.getElementById('tbody-nhanvien').innerHTML = table;
 }
