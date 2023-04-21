@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "ThemDDchoTour";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="content-wrapper">
+    <div class="page-header">
+        <h3 class="page-title"> Quản lý Tour Du Lịch </h3>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Địa Điểm-Tour</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tour</h4>
+                <p class="card-description" id="card-action"></p>
+                <form class="forms-sample" id="form-tour">
+                    <div class="form-group">
+                        <label for="MaTour">Mã Tour</label>
+                        <input type="text" class="form-control" id="MaTour" placeholder="Mã Tour">
+                    </div>
+                     <div class="form-group">
+                       <label for="Madiemtham">Mã Điểm Thăm Quan</label>
+                        <input type="text" class="form-control" id="MaTour" placeholder="Mã Tour">
+                    </div>
+                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="InsertTour()">
+                        <i class="mdi mdi-upload btn-icon-prepend"></i>Thêm
+                    </button>
+                    <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="UpdateTour()">
+                        Sửa <i class="mdi mdi-file-check btn-icon-append"></i>
+                    </button>
+                    <button type="button" class="btn btn-gradient-warning btn-icon-text" onclick="resetInput()">
+                        <i class="mdi mdi-reload btn-icon-prepend"></i> Cancel
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/admin/layoutdmin/assets/js/tour.js"></script>

@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     getAllTour();
-    return true;
 });
 
 function getAllTour() {
@@ -15,7 +14,7 @@ function getAllTour() {
         success: function (response) {
             var count = parseInt(response.totalCount);
             const pageNumber = 1;
-            const pageSize = 3;
+            const pageSize = 5;
             $.ajax({
                 url: `https://localhost:7269/api/APITour/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
                 method: 'GET',
@@ -47,7 +46,7 @@ function renderPagination(totalPages, currentPage) {
 }
 
 function setPage(pageNumber) {
-    const pageSize = 3;
+    const pageSize = 5;
     document.getElementById('page-number').innerHTML = pageNumber;
     $.ajax({
         url: `https://localhost:7269/api/APITour/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
@@ -67,7 +66,7 @@ function setPage(pageNumber) {
 }
 function resetInput() {
     $("#MaTour").val("").change()
-    $("#tenTour").val("").change()
+    $("#TenTour").val("").change()
     $("#GiaCho").val("").change()
     $("#XepHangTour").val("").change()
     $("#avartar").val("").change()
@@ -162,7 +161,7 @@ function updateTourFill(id) {
             $("#XepHangTour").val(response.xepHangTour).change()
             $("#avatar").val(response.anh.trim()).change()
             $("#SoNgayDL").val(response.soNgayDl).change()
-            $("#DXP").val(response.diemXuatPhat).change()
+            $("#DXP").val(response.diemXuatPhat.trim()).change()
         }
     });
 }
@@ -197,8 +196,8 @@ function renderTable(response) {
             cls = "table-success";
         }
         table = table + '<tr class="'+cls+'">';
-        table = table + '<td>' + response.items[i].maTour.trim() + '</td>';
-        table = table + '<td>' + response.items[i].tenTour.trim() + '</td>';         
+        table = table + '<td> ' + response.items[i].maTour.trim() + '</td>';
+        table = table + '<td>  <a style="font-weight:bold; text-align:center; color:black; text-decoration:none" href="/home/chitiettour?matour=' + response.items[i].maTour.trim()+ '">' + response.items[i].tenTour.trim() + '</a></td>';         
         table = table + `<td class="py-1">
                     <img src="../../img/anhdaidien/${!!response.items[i].anh ? response.items[i].anh.trim() : 'default-avatar.png'}" alt="image" />
                 </td>`;
