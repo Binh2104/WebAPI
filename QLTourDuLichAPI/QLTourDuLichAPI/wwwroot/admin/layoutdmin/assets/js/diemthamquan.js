@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
     getAllDiemThamQuan();
-    return true;
 });
 
 function getAllDiemThamQuan() {
@@ -173,8 +172,16 @@ function deleteDTQ(id) {
 function renderTable(response) {
     const len = response.items.length;
     let table = '';
+    let cls = "table-success";
+
     for (var i = 0; i < len; ++i) {
-        table = table + '<tr>';
+        if (i % 2 == 0) {
+            cls = "table-primary";
+        }
+        else {
+            cls = "table-success";
+        }
+        table = table + '<tr class="' + cls + '">';
         table = table + '<td>' + response.items[i].maDd.trim() + '</td>';
         table = table + '<td>' + response.items[i].tendiadiem.trim() + '</td>';
         table = table + '<td>' + response.items[i].mien.trim() + '</td>';

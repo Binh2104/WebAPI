@@ -44,6 +44,27 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             var lstTour = (from a in db.Tours select a).ToList();
             return View(lstTour);
         }
+        [Route("ThemDDchoTour")]
+        [Authentication]
+        public IActionResult ThemDDchoTour()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTour = (from a in db.Tours
+                         select new
+                         {
+                             a.MaTour,
+                             a.TenTour
+                         }).ToList();
+            var lstDD = (from a in db.DiemThamQuans
+                         select new
+                         {
+                             a.MaDd,
+                             a.Tendiadiem
+                         }).ToList();
+            ViewBag.DD=lstDD;
+            ViewBag.Tour = lstTour;
+            return View();
+        }
         //Nhan Vien
         [Route("danhsachnhansu")]
 		[Authentication]
@@ -53,7 +74,15 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
 			var lstNV = (from a in db.NhanViens select a).ToList();
 			return View(lstNV);
 		}
+        [Route("taikhoan")]
+        [Authentication]
+        public IActionResult taikhoan()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTK = (from a in db.TaiKhoans select a).ToList();
+            return View(lstTK);
+        }
 
 
-	}
+    }
 }
