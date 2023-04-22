@@ -5,7 +5,7 @@ namespace QLTourDuLichAPI.InputModelsApi
     {
         public string MaTin { get; set; } = null!;
 
-        public string Anh { get; set; } = null!;
+        public IFormFile? Anh { get; set; } = null!;
 
         public string MoTa { get; set; } = null!;
 
