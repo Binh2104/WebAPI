@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
-    getAllTaikhoan();
+    getAllKST();
 });
 
-function getAllTaikhoan() {
+function getAllKST() {
     $.ajax({
-        url: `https://localhost:7269/api/apitaikhoan`,
+        url: `https://localhost:7269/api/apiKST`,
         method: 'GET',
         contentType: 'json',
         dataType: 'json',
@@ -16,7 +16,7 @@ function getAllTaikhoan() {
             const pageNumber = 1;
             const pageSize = 5;
             $.ajax({
-                url: `https://localhost:7269/api/apitaikhoan/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
+                url: `https://localhost:7269/api/apiKST/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
                 method: 'GET',
                 contentType: 'json',
                 dataType: 'json',
@@ -34,7 +34,7 @@ function getAllTaikhoan() {
         },
     })
 }
-$("#form-taikhoan").submit(function (e) {
+$("#form-KST").submit(function (e) {
     e.preventDefault();
 })
 function renderPagination(totalPages, currentPage) {
@@ -42,14 +42,14 @@ function renderPagination(totalPages, currentPage) {
     for (let i = 1; i <= totalPages; i++) {
         pagination += `<button class="btn ${i === currentPage ? 'btn-primary' : 'btn-outline-primary'}" onclick="setPage(${i})">${i}</button> `;
     }
-    document.getElementById('pagination_taikhoan').innerHTML = pagination;
+    document.getElementById('pagination_KST').innerHTML = pagination;
 }
 
 function setPage(pageNumber) {
     const pageSize = 5;
     document.getElementById('page-number').innerHTML = pageNumber;
     $.ajax({
-        url: `https://localhost:7269/api/apitaikhoan/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
+        url: `https://localhost:7269/api/apiKST/getPagination?pageSize=${pageSize}&pagenumber=${pageNumber}`,
         method: 'GET',
         contentType: 'json',
         dataType: 'json',
@@ -64,26 +64,18 @@ function setPage(pageNumber) {
         }
     });
 }
-
-function resetInput() {
-    $("#userName").val("").change()
-    $("#loai").val("").change()
-    $("#password").val("").change()
-    $("#confirmPassword").val("").change()
-}
-function InsertTK() {
-    var UserName = $("#userName").val();
-    var Loai = $("#loai").val();
-    var Password = $("#password").val();
-    var ConfirmPassword = $("#confirmPassword").val();
+function InsertKST() {
+    var maKs = $("#MaKS").val();
+    var matour = $("#MaTour").val();
+    var vta = $("#ViTriAnh").val();
 
     var formData = new FormData();
-    formData.append("userName", UserName);
-    formData.append("loai", Loai);
-    formData.append("password", Password);
-    formData.append("confirmPassword", ConfirmPassword);
 
-    var url = 'https://localhost:7269/api/apitaikhoan/themTK';
+    formData.append("maKs", maKs);
+    formData.append("maTour", matour);
+    formData.append("viTriAnh", vta);
+
+    var url = 'https://localhost:7269/api/APIKST/themKST';
     $.ajax({
         url: url,
         method: 'POST',
@@ -96,13 +88,13 @@ function InsertTK() {
         success: function (response) {
             alert("Thêm mới thành công");
             resetInput();
-            getAllTaikhoan(); //Gọi đến hàm lấy dữ liệu lên bảng
+            getAllKST(); //Gọi đến hàm lấy dữ liệu lên bảng
         }
     });
 }
 
-function deleteTK(id) {
-    var url = 'https://localhost:7269/api/Apitaikhoan?input=' + id;
+function deleteKST(id1, id2) {
+    var url = 'https://localhost:7269/api/ApiKST?xoa?matour='+id1+'&maks='+id2;
     $.ajax({
         url: url,
         method: 'DELETE',
@@ -110,19 +102,25 @@ function deleteTK(id) {
         dataType: 'json',
         error: function (response) {
             /* alert("Xóa không thành công");*/
-            getAllTaikhoan();
+            getAllKST();
         },
         success: function (response) {
             alert("Xóa thành công");
-            getAllTaikhoan(); //Gọi đến hàm lấy dữ liệu lên bảng
+            getAllKST(); //Gọi đến hàm lấy dữ liệu lên bảng
         }
     });
+}
+function resetInput() {
+    $("#MaTour").val("").change()
+    $("#MaKS").val("").change()
+    $("#ViTriAnh").val("").change()
 }
 
 function renderTable(response) {
     const len = response.items.length;
     let table = '';
     let cls = "table-success";
+
     for (var i = 0; i < len; ++i) {
         if (i % 2 == 0) {
             cls = "table-primary";
@@ -131,13 +129,11 @@ function renderTable(response) {
             cls = "table-success";
         }
         table = table + '<tr class="' + cls + '">';
-        table = table + '<td>' + response.items[i].userName.trim() + '</td>';
-        table = table + `<td>${response.items[i].loai == 1 ? 'Admin': 'Khách'}</td>`;
-       /* table = table + '<td>' + response.items[i].loai + '</td>';*/
-        table = table + '<td>' + response.items[i].password.trim() + '</td>';
-        table = table + '<td>' + response.items[i].confirmPassword.trim() + '</td>';
-        
-        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteTK(\'' + response.items[i].userName.trim() + '\')">Delete</button> ' + '</td>';
+        table = table + '<td> <a style="font-weight:bold; text-align:center; color:black; text-decoration:none" href="/home/chitiettour?matour=' + response.items[i].maTour.trim() + '">' + response.items[i].tenTour.trim() + '</td>';
+        table = table + '<td>' + response.items[i].tenKs.trim() + '</td>';    
+        /*table = table + `<td>${ !!response.items[i].viTriAnh.trim() ? response.items[i].viTriAnh.trim() : 'NOT!' }</td>`;*/
+
+        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteKST(\'' + response.items[i].maTour.trim() + '\',' + '\'' + response.items[i].maKs.trim() + '\')">Delete</button> ' + '</td>';
     }
-    document.getElementById('tbody-taikhoan').innerHTML = table;
+    document.getElementById('tbody-KST').innerHTML = table;
 }

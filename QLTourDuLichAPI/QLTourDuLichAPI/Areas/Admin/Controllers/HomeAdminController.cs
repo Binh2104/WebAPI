@@ -65,6 +65,27 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             ViewBag.Tour = lstTour;
             return View();
         }
+        [Route("ThemKSchoTour")]
+        /*[Authentication]*/
+        public IActionResult ThemKSchoTour()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTour = (from a in db.Tours
+                           select new
+                           {
+                               a.MaTour,
+                               a.TenTour
+                           }).ToList();
+            var lstks = (from a in db.KhachSans
+                         select new
+                         {
+                             a.MaKs,
+                             a.TenKs
+                         }).ToList();
+            ViewBag.DD = lstks;
+            ViewBag.Tour = lstTour;
+            return View();
+        }
         //Nhan Vien
         [Route("danhsachnhansu")]
 		[Authentication]

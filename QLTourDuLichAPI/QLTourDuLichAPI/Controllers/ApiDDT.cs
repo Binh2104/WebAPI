@@ -74,8 +74,7 @@ namespace QLTourDuLichAPI.Controllers
             var DDT = (from a in db.DiaDiemTours
                        join b in db.Tours on a.MaTour equals b.MaTour
                        join c in db.DiemThamQuans on a.MaDd equals c.MaDd
-                       where a.MaTour == id1 && a.MaDd== id2
-                       
+                       where a.MaTour == id1 && a.MaDd== id2                       
                        select new
                        {
                            a.MaDd,
@@ -97,13 +96,13 @@ namespace QLTourDuLichAPI.Controllers
                 return BadRequest(ModelState);
             }
             // Upload the image to the server
-            var DDCheck = (from a in db.DiaDiemTours
+            /*var DDCheck = (from a in db.DiaDiemTours
                            where a.MaDd == input.MaDd && a.MaTour == input.MaTour
                            select a).ToList();
             if (DDCheck != null)
             {
                 return BadRequest("Đã Tồn Tại !");
-            }
+            }*/
 
             var newDDT = new DiaDiemTour
             {
@@ -117,6 +116,30 @@ namespace QLTourDuLichAPI.Controllers
             db.SaveChanges();
             return Ok(input);
         }
+       /* [HttpPut]
+        [Route("capnhatDDT")]
+        public async Task<IActionResult> UpdateDTQAsync([FromForm] DiaDiemTourCreateInputModel input)
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            // Find the DiemThamQuan in the database by id
+            var DTQ = await db.DiaDiemTours.FindAsync(input.MaTour);
+            if (DTQ == null)
+            {
+                return NotFound();
+            }
+            DTQ.MaTour = input.MaTour;
+            DTQ.MaDd = input.MaDd;
+            DTQ.ViTriAnh = input.ViTriAnh; 
+            
+            db.DiaDiemTours.Update(DTQ);
+            await db.SaveChangesAsync();
+            return Ok();
+        }*/
 
         [HttpDelete]
         [Route("xoa")]

@@ -65,7 +65,7 @@ function setPage(pageNumber) {
     });
 }
 function Insert() {
-    var maDd = $("#MaDDT").val();
+    var maDd = $("#MaDTQ").val();
     var matour = $("#MaTour").val();
     var vta = $("#ViTriAnh").val();
 
@@ -93,26 +93,72 @@ function Insert() {
     });
 }
 
-/*function deleteDDT(id) {
-    var url = 'https://localhost:7269/api/ApiDiemThamQuan?xoa';
+/*function UpdateDDT() {
+    var maDd = $("#MaDTQ").val();
+    var matour = $("#MaTour").val();
+    var vta = $("#ViTriAnh").val();
+
+    var formData = new FormData();
+
+    formData.append("maDd", maDd);
+    formData.append("maTour", matour);
+    formData.append("viTriAnh", vta);
+
+    var url = 'https://localhost:7269/api/APIDDT/capnhatDDT';
+    $.ajax({
+        url: url,
+        method: 'PUT',
+        processData: false,
+        contentType: false,
+        data: formData,
+        error: function (error) {
+            alert("Có lỗi xảy ra");
+        },
+        success: function (response) {
+            alert("Cập nhật thành công");
+            resetInput();
+            getAllDDT(); //Gọi đến hàm lấy dữ liệu lên bảng
+        }
+    });
+}*/
+
+/*function updateDDTFill(id1, id2) {
+    var url = 'https://localhost:7269/api/ApiDDT/getById?id1=' + id1+'&id2='+id2;
+    $.ajax({
+        url: url,
+        method: 'GET',
+        contentType: 'json',
+        dataType: 'json',
+        error: function (response) {
+            alert("Cập nhật không thành công");
+        },
+        success: function (response) {
+            $("#MaTour").val(response.maTour.trim())
+            $("#MaDTQ").val(response.maDd.trim()).change()
+            $("#ViTriAnh").val(response.viTriAnh.trim()).change()
+        }
+    });
+}*/
+function deleteDDT(id1, id2) {
+    var url = 'https://localhost:7269/api/ApiDDT/xoa?matour='+id1+'&madd='+id2;
     $.ajax({
         url: url,
         method: 'DELETE',
         contentType: 'json',
         dataType: 'json',
         error: function (response) {
-            *//* alert("Xóa không thành công");*//*
-            getAllDiemThamQuan();
+             /*alert("Xóa không thành công");*/
+            getAllDDT();
         },
         success: function (response) {
             alert("Xóa thành công");
-            getAllDiemThamQuan(); //Gọi đến hàm lấy dữ liệu lên bảng
+            getAllDDT(); //Gọi đến hàm lấy dữ liệu lên bảng
         }
     });
-}*/
+}
 function resetInput() {
     $("#MaTour").val("").change()
-    $("#MaDDT").val("").change()
+    $("#MaDTQ").val("").change()
     $("#ViTriAnh").val("").change()
 }
 
@@ -129,12 +175,11 @@ function renderTable(response) {
             cls = "table-success";
         }
         table = table + '<tr class="' + cls + '">';
-        table = table + '<td>' + response.items[i].tenTour.trim() + '</td>';
-        table = table + '<td>' + response.items[i].tendiadiem.trim() + '</td>';
-       
-        table = table + `<td>${ !!response.items[i].viTriAnh.trim() ? response.items[i].viTriAnh.trim() : 'NOT!' }</td>`;
-
-       /* table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteDDT(\'' + response.items[i].maDd.trim() + '\')">Delete</button> ' + '</td>';*/
+        table = table + '<td> <a style="font-weight:bold; text-align:center; color:black; text-decoration:none" href="/home/chitiettour?matour=' + response.items[i].maTour.trim() + '">' + response.items[i].tenTour.trim() + '</td>';
+        table = table + '<td>' + response.items[i].tendiadiem.trim() + '</td>';    
+        table = table + `<td>${!!response.items[i].viTriAnh.trim() ? response.items[i].viTriAnh.trim() : 'NOT!'}</td>`;
+      /*  table = table + '<td>' + ' <button type="button" class="btn btn-gradient-info btn-rounded btn-icon" onclick="updateDDTFill(\'' + response.items[i].maTour.trim() + '\',' + '\'' + response.items[i].maDd.trim() + '\')">Edit</button> ' + '</td>';*/
+        table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteDDT(\'' + response.items[i].maTour.trim() + '\',' +'\'' + response.items[i].maDd.trim() + '\')">Delete</button> ' + '</td>';
     }
     document.getElementById('tbody-DDT').innerHTML = table;
 }
