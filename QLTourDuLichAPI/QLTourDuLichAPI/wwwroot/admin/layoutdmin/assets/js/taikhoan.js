@@ -132,11 +132,10 @@ function renderTable(response) {
         }
         table = table + '<tr class="' + cls + '">';
         table = table + '<td>' + response.items[i].userName.trim() + '</td>';
-        table = table + `<td>${response.items[i].loai == 1 ? 'Admin': 'Khách'}</td>`;
-       /* table = table + '<td>' + response.items[i].loai + '</td>';*/
+        table = table + '<td>' + response.items[i].loai + '</td>';
         table = table + '<td>' + response.items[i].password.trim() + '</td>';
         table = table + '<td>' + response.items[i].confirmPassword.trim() + '</td>';
-        
+
         table = table + '<td>' + ' <button type="button" class="btn btn-gradient-danger btn-rounded btn-icon" onclick="deleteTK(\'' + response.items[i].userName.trim() + '\')">Delete</button> ' + '</td>';
     }
     document.getElementById('tbody-taikhoan').innerHTML = table;

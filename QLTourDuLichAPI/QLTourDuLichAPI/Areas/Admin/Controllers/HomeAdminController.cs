@@ -65,27 +65,6 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             ViewBag.Tour = lstTour;
             return View();
         }
-        [Route("ThemKSchoTour")]
-        /*[Authentication]*/
-        public IActionResult ThemKSchoTour()
-        {
-            ViewBag.Username = HttpContext.Session.GetString("UserName");
-            var lstTour = (from a in db.Tours
-                           select new
-                           {
-                               a.MaTour,
-                               a.TenTour
-                           }).ToList();
-            var lstks = (from a in db.KhachSans
-                         select new
-                         {
-                             a.MaKs,
-                             a.TenKs
-                         }).ToList();
-            ViewBag.DD = lstks;
-            ViewBag.Tour = lstTour;
-            return View();
-        }
         //Nhan Vien
         [Route("danhsachnhansu")]
 		[Authentication]
@@ -93,12 +72,7 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
 		{
 			ViewBag.Username = HttpContext.Session.GetString("UserName");
 			var lstNV = (from a in db.NhanViens select a).ToList();
-            var lstU = (from a in db.TaiKhoans
-                        where a.Loai == 1 && !db.NhanViens.Select(nv => nv.UserName).Contains(a.UserName)
-                        select a.UserName).ToList();
-            ViewBag.U = lstU;
-            return View(lstNV);
-
+			return View(lstNV);
 		}
         [Route("taikhoan")]
         [Authentication]
@@ -109,6 +83,7 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             return View(lstTK);
         }
 
+<<<<<<< HEAD
         [Route("danhsachtintuc")]
         [Authentication]
         public IActionResult danhsachtintuc()
@@ -135,5 +110,8 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             var lstTK = (from a in db.TaiKhoans select a).ToList();
             return View(lstTK);
         }
+=======
+
+>>>>>>> parent of ad5e9ab (ok)
     }
 }
