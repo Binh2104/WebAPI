@@ -44,10 +44,6 @@ namespace QLTourDuLichAPI.Controllers
                        where a.MaKs == maKhachSan
                        select a
                      ).ToList();
-
-
-
-
             ViewBag.chitietKs = chi;
 
 			return View(KhachSan);
