@@ -1,6 +1,6 @@
-﻿
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "ThemDDchoTour";
+    ViewData["Title"] = "ThemKSchoTour";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
 }
 <div class="content-wrapper">
@@ -8,31 +8,30 @@
         <h3 class="page-title"> Quản lý Tour Du Lịch </h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Địa Điểm-Tour</li>
+                <li class="breadcrumb-item"><a asp-controller="homeadmin" asp-action="index" >Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Khách Sạn-Tour</li>
             </ol>
         </nav>
     </div>
     <div class="col-lg-12 stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Danh Sách Tour và DTQ</h4>
+                <h4 class="card-title">Danh Sách Tour - Khách Sạn</h4>
                 <table class="table table-bordered">
                     <thead>
                         <tr class="table-info">
                             <th>Tên Tour</th>
-                            <th>Điểm Thăm quan</th>
-                            <th>Vị Trí Ảnh</th>
+                            <th>Tên Khách Sạn</th>
                             <th></th>
-                            <th></th>
+                            @*<th></th>*@
                         </tr>
                     </thead>
-                    <tbody id="tbody-DDT">
+                    <tbody id="tbody-KST">
                     </tbody>
                 </table>
                 <br />
                 <div class="text-center">Page <span id="page-number">1</span></div>
-                <div id="pagination_DDT"></div>
+                <div id="pagination_KST"></div>
             </div>
         </div>
     </div>
@@ -43,31 +42,33 @@
                 <p class="card-description" id="card-action"></p>
                 <form class="forms-sample" id="form-tour">
                     <div class="form-group">
-                        <label for="MaTour">Tour</label>
+                        <label for="MaTour">Tour
                         <select class="form-control form-control-lg" id="MaTour">
                             @foreach (var item in ViewBag.Tour)
                             {
                                 <option value=@item.MaTour>@item.TenTour</option>
                             }
-                        </select>
-                    </div>
-                     <div class="form-group">
-                       <label for="MaDTQ">Điểm Thăm Quan</label>
-                        <select class="form-control form-control-lg" id="MaDTQ">
-                            @foreach (var item in ViewBag.DD)
-                            {
-                                <option value=@item.MaDd>@item.Tendiadiem</option>
-                            }
-                        </select>
+                            </select>
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label for="ViTriAnh">Vị Trí Ảnh</label>                          
-                            <input type="text" class="form-control" id="ViTriAnh" placeholder="Vị Trí Ảnh">
+                        <label for="MaKS">Khách Sạn
+                        <select class="form-control form-control-lg" id="MaKS">
+                            @foreach (var item in ViewBag.DD)
+                            {
+                                <option value=@item.MaKs>@item.TenKs</option>
+                            }
+                        </select>
+                        </label>
                     </div>
-                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="Insert()">
+                    <div class="form-group">
+                        <label for="ViTriAnh">Vị Trí Ảnh</label>
+                        <input type="text" class="form-control" id="ViTriAnh" placeholder="Vị Trí Ảnh">
+                    </div>
+                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="InsertKST()">
                         <i class="mdi mdi-upload btn-icon-prepend"></i>Thêm
                     </button>
-                   @* <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="UpdateDDT()">
+                  @*  <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="Update()">
                         Sửa <i class="mdi mdi-file-check btn-icon-append"></i>
                     </button>*@
                     <button type="button" class="btn btn-gradient-warning btn-icon-text" onclick="resetInput()">
@@ -78,4 +79,5 @@
         </div>
     </div>
 </div>
-<script src="~/admin/layoutdmin/assets/js/ddt.js"></script>
+<script src="~/admin/layoutdmin/assets/js/KST.js"></script>
+

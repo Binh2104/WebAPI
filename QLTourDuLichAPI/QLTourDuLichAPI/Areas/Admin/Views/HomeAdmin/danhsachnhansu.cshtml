@@ -47,40 +47,57 @@
             <div class="card-body">
                 <h4 class="card-title">Nhân Viên</h4>
                 <p class="card-description" id="card-action"></p>
-                <form class="forms-sample" id="form-nhanvien">
-                    <div class="form-group">
-                        <label for="MaNV">Mã Nhân Viên</label>
-                        <input type="text" class="form-control" id="MaNV" placeholder="Mã địa điểm">
+                <form class="form-sample">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="MaNV">Mã Nhân Viên
+                                    <input type="text" class="form-control" id="MaNV" placeholder="Mã Nhân Viên">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="TenNV">Tên Nhân viên
+                                    <input type="text" class="form-control" id="TenNV" placeholder="Tên nhân viên">
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="TenNV">Tên Nhân viên</label>
-                        <input type="text" class="form-control" id="TenNV" placeholder="Tên nhân viên">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="gioitinh">UserName
+                                    <select class="form-control form-control-lg" id="UserName">
+                                        @foreach (var item in ViewBag.U)
+                                            {
+                                                <option value="@item">@item.ToString()</option>
+                                            }
+                                    </select>
+                                </label>
+                            </div>
+                        </div>                    
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="sdt">Số điện thoại
+                                    <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại">
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="gioitinh">Giới tính</label>
-                        <select class="form-control form-control-lg" id="gioitinh">
-
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="sdt">Số điện thoại</label>
-                        <input type="text" class="form-control" id="sdt" placeholder="Số điện thoại">
-                    </div>
-                    <div class="form-group">
-                        <label for="diachi">Địa chỉ</label>
-                        <input type="text" class="form-control" id="diachi" placeholder="Địa chỉ">
-                    </div>
-                    <div class="form-group">
-                        <label for="UserName">UserName</label>
-                        <input type="text" class="form-control" id="UserName" placeholder="UserName">
-                    </div>
-                    
-
-                    <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="InsertNV()">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label for="gioitinh">Giới tính                   
+                    <select class="form-control form-control-lg" id="gioitinh">                                   
+                        <option value="Nam">Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    </label>
+                </div>
+            </div>
+         </div>
+                <button type="button" class="btn btn-gradient-danger btn-icon-text" onclick="InsertNV()">
                         <i class="mdi mdi-upload btn-icon-prepend"></i>Thêm
                     </button>
                     <button type="button" class="btn btn-gradient-dark btn-icon-text" onclick="UpdateNV()">
@@ -89,7 +106,6 @@
                     <button type="button" class="btn btn-gradient-warning btn-icon-text" onclick="resetInput()">
                         <i class="mdi mdi-reload btn-icon-prepend"></i> Cancel
                     </button>
-
                 </form>
             </div>
         </div>

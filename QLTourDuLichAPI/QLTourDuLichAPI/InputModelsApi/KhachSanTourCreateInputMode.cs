@@ -9,8 +9,5 @@ namespace QLTourDuLichAPI.InputModelsApi
 
         public string MaTour { get; set; } = null!;
 
-        public virtual KhachSan MaKsNavigation { get; set; } = null!;
-
-        public virtual Tour MaTourNavigation { get; set; } = null!;
     }
 }
