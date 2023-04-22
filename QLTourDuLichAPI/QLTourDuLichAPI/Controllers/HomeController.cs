@@ -29,7 +29,26 @@ namespace QLTourDuLichAPI.Controllers
             PagedList<Tour> lst = new PagedList<Tour>(lstsanpham, pageNumber, pageSize);
             return View(lst);
         }
-        public IActionResult ChiTietTour(string MaTour)
+		public IActionResult KhachSan(int page = 1)
+		{
+			int pageNumber = page;
+			int pageSize = 3;
+			var lstsanpham = db.KhachSans.OrderBy(x => x.TenKs).ToList();
+			PagedList<KhachSan> lst = new PagedList<KhachSan>(lstsanpham, pageNumber, pageSize);
+			return View(lst);
+		}
+        public IActionResult ChiTietKhachSan (string maKhachSan) {
+			var KhachSan = db.KhachSans.SingleOrDefault(x => x.MaKs== maKhachSan);
+
+            var chi = (from a in db.KhachSans
+                       where a.MaKs == maKhachSan
+                       select a
+                     ).ToList();
+            ViewBag.chitietKs = chi;
+
+			return View(KhachSan);
+		}
+		public IActionResult ChiTietTour(string MaTour)
         {
             var chitiet = (from a in db.DiemThamQuans
                            join b in db.DiaDiemTours on a.MaDd equals b.MaDd

@@ -109,6 +109,25 @@ namespace QLTourDuLichAPI.Areas.Admin.Controllers
             return View(lstTK);
         }
 
-
+        [Route("danhsachtintuc")]
+        [Authentication]
+        public IActionResult danhsachtintuc()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstTT = (from a in db.TinTucs select a).ToList();
+            var lstU = (from a in db.NhanViens
+                       /* where a.Loai == 1 && !db.NhanViens.Select(nv => nv.UserName).Contains(a.UserName)*/
+                        select a.MaNv).ToList();
+            ViewBag.U = lstU;
+            return View(lstTT);
+        }
+        [Route("danhsachkhachhang")]
+        [Authentication]
+        public IActionResult danhsachkhachhang()
+        {
+            ViewBag.Username = HttpContext.Session.GetString("UserName");
+            var lstKH = (from a in db.KhachHangs select a).ToList();
+            return View(lstKH);
+        }
     }
 }
